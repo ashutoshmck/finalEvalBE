@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   collections.init({
     name: DataTypes.STRING,
-    content_type_id: DataTypes.UUID
+    content_type_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'collections',

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   records.init({
-    collection_id: DataTypes.UUID,
+    collection_id: DataTypes.STRING,
     content: DataTypes.JSON
   }, {
     sequelize,
