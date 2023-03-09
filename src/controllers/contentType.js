@@ -19,6 +19,18 @@ const createContentType = async (req, res) => {
   }
 };
 
+const updateName = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const updatedContentType = await contentTypeService.updateName(id, name);
+    res.status(200).json(updatedContentType);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+
 const addFieldToContentType = async (req, res) => {
   try {
     const { id } = req.params;
@@ -30,4 +42,15 @@ const addFieldToContentType = async (req, res) => {
   }
 };
 
-module.exports = { getAllContentTypes, createContentType, addFieldToContentType };
+const deleteFieldFromContentType = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const updatedContentType = await contentTypeService.deleteFieldFromContentType(id, name);
+    res.status(200).json(updatedContentType);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+module.exports = { getAllContentTypes, createContentType, addFieldToContentType, updateName, deleteFieldFromContentType };
