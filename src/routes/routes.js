@@ -8,9 +8,16 @@ router.route('/content_types')
   .post(contentTypeController.createContentType);
 
 router.route('/content_types/:id')
-  .post(contentTypeController.addFieldToContentType);
+  .post(contentTypeController.addFieldToContentType)
+  .patch(contentTypeController.updateName)
+  .delete(contentTypeController.deleteFieldFromContentType);
 
 router.route('/collections/:id/records')
   .get(recordController.getRecordsByCollectionId)
   .post(recordController.createRecord);
+
+router.route('/collections/:id/records/:recordId')
+  .put(recordController.updateRecordByCollectionId)
+  .delete(recordController.deleteRecordByCollectionId);
+
 module.exports = { router };
