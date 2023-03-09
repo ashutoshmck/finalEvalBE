@@ -2,7 +2,7 @@ const recordService = require('../services/record');
 
 const createRecord = async (req, res) => {
   try {
-    const { collectionId } = req.params;
+    const collectionId = req.params.id;
     const { content } = req.body;
     const newRecord = await recordService.createRecord(collectionId, content);
     res.status(201).json(newRecord);
@@ -13,7 +13,7 @@ const createRecord = async (req, res) => {
 
 const getRecordsByCollectionId = async (req, res) => {
   try {
-    const { collectionId } = req.params;
+    const collectionId = req.params.id;
     const records = await recordService.getRecordsByCollectionId(collectionId);
     res.status(200).json(records);
   } catch (error) {

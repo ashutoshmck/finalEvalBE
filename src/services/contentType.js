@@ -6,7 +6,6 @@ const createContentType = async (name) => {
     fields: {}
   };
   const newContentType = await db.content_types.create(contentType);
-  console.log(newContentType.id);
   const collection = {
     name: name,
     content_type_id: newContentType.id
