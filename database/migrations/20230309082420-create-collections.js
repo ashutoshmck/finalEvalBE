@@ -11,7 +11,8 @@ module.exports = {
         autoIncrement: true
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       content_type_id: {
         type: Sequelize.INTEGER,
