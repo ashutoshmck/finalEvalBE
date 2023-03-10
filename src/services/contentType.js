@@ -40,11 +40,15 @@ const addFieldToContentType = async (id, name, type) => {
     returning: true,
     plain: true
   });
-  const updatedRecords = await db.records.update({
+  const newContent = {
     content: {
       ...updatedContentType[1].dataValues.fields,
       [name]: ''
     }
+  };
+  // eslint-disable-next-line no-unused-vars
+  const updatedRecords = await db.records.update({
+    newContent
   }, {
     where: {
       collection_id: id
@@ -52,7 +56,6 @@ const addFieldToContentType = async (id, name, type) => {
     returning: true,
     plain: true
   });
-  console.log(updatedRecords[1].dataValues);
   return updatedContentType[1].dataValues;
 };
 

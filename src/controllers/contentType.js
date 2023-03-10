@@ -40,7 +40,7 @@ const updateName = async (req, res) => {
 
 const addFieldToContentType = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
     const { name, type } = req.body;
     const updatedContentType = await contentTypeService.addFieldToContentType(id, name, type);
     res.status(200).json(updatedContentType);
