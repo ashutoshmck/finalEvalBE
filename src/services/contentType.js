@@ -1,4 +1,5 @@
 const db = require('../../database/models/index');
+const HTTPError = require('../utils/errors/http_errors');
 
 const createContentType = async (name) => {
   const contentType = {
@@ -26,6 +27,9 @@ const addFieldToContentType = async (id, name, type) => {
     }
   });
   const fields = contentType.fields;
+  if (fields[name] != null) {
+    throw new HTTPError('Field already exists', 400);
+  }
   fields[name] = type;
   const updatedContentType = await db.content_types.update({
     fields: fields
@@ -36,6 +40,19 @@ const addFieldToContentType = async (id, name, type) => {
     returning: true,
     plain: true
   });
+  const updatedRecords = await db.records.update({
+    content: {
+      ...updatedContentType[1].dataValues.fields,
+      [name]: ''
+    }
+  }, {
+    where: {
+      collection_id: id
+    },
+    returning: true,
+    plain: true
+  });
+  console.log(updatedRecords[1].dataValues);
   return updatedContentType[1].dataValues;
 };
 
@@ -100,4 +117,23 @@ const deleteFieldFromContentType = async (id, name) => {
   return updatedContentType[1].dataValues;
 };
 
-module.exports = { createContentType, getAllContentTypes, addFieldToContentType, updateName, deleteFieldFromContentType };
+const updateFieldInContentType = async (id, name, type) => {
+  const contentType = await db.content_types.findOne({
+    where: {
+      id: id
+    }
+  });
+  const fields = contentType.fields;
+  console.log(fields);
+  fields[name] = type;
+};
+
+
+module.exports = {
+  createContentType,
+  getAllContentTypes,
+  addFieldToContentType,
+  updateName,
+  deleteFieldFromContentType,
+  updateFieldInContentType
+};
