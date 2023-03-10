@@ -9,10 +9,11 @@ router.route('/content_types')
   .get(authMiddleware.authenticateToken, contentTypeController.getAllContentTypes)
   .post(authMiddleware.authenticateToken, validator.validationMiddleware(validator.contentTypeSchema), contentTypeController.createContentType);
 
+router.route('/content_types/:id')
+  .patch(authMiddleware.authenticateToken, validator.validationMiddleware(validator.contentTypeSchema), contentTypeController.updateName);
 router.route('/content_types/:id/fields')
   .post(authMiddleware.authenticateToken, validator.validationMiddleware(validator.fieldSchema), contentTypeController.addFieldToContentType)
   .put(authMiddleware.authenticateToken, validator.validationMiddleware(validator.fieldSchema), contentTypeController.updateFieldInContentType)
-  .patch(authMiddleware.authenticateToken, validator.validationMiddleware(validator.contentTypeSchema), contentTypeController.updateName)
   .delete(authMiddleware.authenticateToken, validator.validationMiddleware(validator.contentTypeSchema), contentTypeController.deleteFieldFromContentType);
 
 router.route('/collections/:id/records')
