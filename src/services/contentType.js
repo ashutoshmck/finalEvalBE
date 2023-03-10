@@ -91,7 +91,7 @@ const deleteFieldFromContentType = async (id, name) => {
     fields: fields
   }, {
     where: {
-      id: id
+      id: id,
     },
     returning: true,
     plain: true

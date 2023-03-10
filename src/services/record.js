@@ -17,12 +17,12 @@ const getRecordsByCollectionId = async (collectionId) => {
   return records;
 };
 
-const updateRecordByCollectionId = async (collectionId, content) => {
+const updateRecordByCollectionId = async (id, content) => {
   const updatedRecord = await db.records.update({
     content: content
   }, {
     where: {
-      collection_id: collectionId
+      id: id,
     },
     returning: true,
     plain: true

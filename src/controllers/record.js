@@ -23,9 +23,9 @@ const getRecordsByCollectionId = async (req, res) => {
 
 const updateRecordByCollectionId = async (req, res) => {
   try {
-    const collectionId = req.params.id;
+    const recordId = req.params.recordId;
     const { content } = req.body;
-    const updatedRecord = await recordService.updateRecordByCollectionId(collectionId, content);
+    const updatedRecord = await recordService.updateRecordByCollectionId(recordId, content);
     res.status(200).json(updatedRecord);
   } catch (error) {
     res.status(500).json(error.message);
